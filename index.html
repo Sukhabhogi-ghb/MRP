@@ -360,9 +360,9 @@
       <div class="chart-num">3</div>
       <div class="chart-title">Delay Impact — Average Delay Minutes by Hub & Incomplete vs. Complete Returns</div>
     </div>
-    <div class="chart-wrap"><canvas id="chartDelay"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartTime"></canvas></div>
     <div class="chart-insight">
-      <strong>What the data shows:</strong> Across all 5 hubs, incomplete returns generate dramatically longer delays than complete returns. The average delay for incomplete returns ranges from 38–55 minutes depending on the hub, compared to near-zero delays for complete returns. This is consistent with Möhlmann (2015), who demonstrated that service reliability directly affects user satisfaction in collaborative consumption systems. Hub 3 shows the steepest delay gap, suggesting that its reprocessing workflow is less efficient than other hubs, compounding the impact of each incomplete return.
+      <strong>What the data shows:</strong> The time series reveals that incomplete returns are not uniformly distributed across the year — peaks appear during mid-year months (June–August), which typically correspond to high-demand lending periods for Camping Gear and Event Equipment. This seasonal pattern supports the need for proactive staffing and inspection protocols during peak periods rather than reactive remediation after delays occur. The Shareable Library of Things Toolkit notes that volunteer-run models are especially vulnerable during high-demand periods when operational capacity is already stretched.
     </div>
   </div>
 
@@ -370,11 +370,11 @@
   <div class="chart-card">
     <div class="chart-header">
       <div class="chart-num">4</div>
-      <div class="chart-title">Temporal Instability — Monthly Incomplete Returns Over Time</div>
+      <div class="chart-title">Delay Impact — Average Delay Minutes by Hub &amp; Incomplete vs. Complete Returns</div>
     </div>
-    <div class="chart-wrap"><canvas id="chartTime"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartDelay"></canvas></div>
     <div class="chart-insight">
-      <strong>What the data shows:</strong> The time series reveals that incomplete returns are not uniformly distributed across the year — peaks appear during mid-year months (June–August), which typically correspond to high-demand lending periods for Camping Gear and Event Equipment. This seasonal pattern supports the need for proactive staffing and inspection protocols during peak periods rather than reactive remediation after delays occur. The Shareable Library of Things Toolkit notes that volunteer-run models are especially vulnerable during high-demand periods when operational capacity is already stretched.
+      <strong>What the data shows:</strong> Across all 5 hubs, incomplete returns generate dramatically longer delays than complete returns. The average delay for incomplete returns ranges from 38–55 minutes depending on the hub, compared to near-zero delays for complete returns. This is consistent with Möhlmann (2015), who demonstrated that service reliability directly affects user satisfaction in collaborative consumption systems. Hub 3 shows the steepest delay gap, suggesting that its reprocessing workflow is less efficient than other hubs, compounding the impact of each incomplete return.
     </div>
   </div>
 
@@ -402,15 +402,28 @@
     </div>
   </div>
 
-  <!-- V7: Missing Component Types -->
+  <!-- V7: Missing Component Types with category filter -->
   <div class="chart-card">
     <div class="chart-header">
       <div class="chart-num">7</div>
       <div class="chart-title">What's Missing — Incomplete Returns by Component Type</div>
     </div>
-    <div class="chart-wrap" style="min-height:260px;"><canvas id="chartCompType"></canvas></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px;">
+      <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#888;font-family:'DM Sans',sans-serif;">Filter by Category:</span>
+      <button class="cat-filter-btn active" onclick="setCompCat('all',this)">All</button>
+      <button class="cat-filter-btn" onclick="setCompCat('Power Tools',this)">Power Tools</button>
+      <button class="cat-filter-btn" onclick="setCompCat('Camping Gear',this)">Camping Gear</button>
+      <button class="cat-filter-btn" onclick="setCompCat('Kitchen Appliances',this)">Kitchen Appliances</button>
+      <button class="cat-filter-btn" onclick="setCompCat('Event Equipment',this)">Event Equipment</button>
+    </div>
+    <div style="display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:center;">
+      <div style="position:relative;height:260px;">
+        <canvas id="chartCompType"></canvas>
+      </div>
+      <div id="compLegend" style="display:flex;flex-direction:column;gap:10px;"></div>
+    </div>
     <div class="chart-insight">
-      <strong>What the data shows:</strong> Among incomplete returns, Accessories and Cords account for the largest share of missing components, followed by Attachments. Cords are the most commonly missing item type in Power Tools, while Accessories dominate for Camping Gear. This breakdown is practically useful for hub managers: targeted checklists for high-risk component types (especially cords for power tools) could reduce the incomplete return rate without requiring a complete overhaul of the inspection process.
+      <strong>What the data shows:</strong> Among incomplete returns, Accessories and Cords account for the largest share of missing components, followed by Attachments. Use the category buttons above to explore which component types are most frequently missing for each product type — Cords dominate for Power Tools, while Accessories are the primary issue for Camping Gear. This breakdown helps hub managers build targeted checklists for the highest-risk items. (Mont, 2002; Jones et al., ACM, 2023)
     </div>
   </div>
 
@@ -1211,29 +1224,69 @@ function renderV6Accuracy() {
   });
 }
 
-// V7 - Component type donut
+// V7 - Component type donut with category filter
+let compCatFilter = 'all';
+
+function setCompCat(cat, btn) {
+  compCatFilter = cat;
+  document.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderV7CompType();
+}
+
 function renderV7CompType() {
   destroyChart('chartCompType');
+  const src = compCatFilter === 'all'
+    ? filteredData
+    : filteredData.filter(r => r[3] === compCatFilter);
+  const inc = src.filter(r => r[7] === 'Incomplete');
   const types = ['Cord','Attachment','Accessory'];
-  const counts = types.map(t=>filteredData.filter(r=>r[9]===t).length);
+  const typeColors = {
+    'Cord':       COLORS.warn,
+    'Attachment': COLORS.neutral,
+    'Accessory':  COLORS.accent2,
+  };
+  const counts = types.map(t => inc.filter(r => r[9] === t).length);
+  const total = counts.reduce((a,b)=>a+b,0);
   const ctx = document.getElementById('chartCompType').getContext('2d');
-  charts['chartCompType'] = new Chart(ctx,{
-    type:'doughnut',
-    data:{
-      labels:types,
-      datasets:[{
-        data:counts,
-        backgroundColor:[COLORS.warn, COLORS.neutral, COLORS.accent2],
-        borderWidth:0,
-        hoverOffset:8
+  charts['chartCompType'] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: types,
+      datasets: [{
+        data: counts,
+        backgroundColor: types.map(t => typeColors[t]),
+        borderWidth: 2,
+        borderColor: '#fff',
+        hoverOffset: 8
       }]
     },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      cutout:'60%',
-      plugins:{legend:{position:'bottom', labels:{font:{family:'DM Sans',size:12},color:'#6b6760', padding:18}}}
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      cutout: '62%',
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => {
+          const pct = total ? (ctx.raw/total*100).toFixed(1) : '0';
+          return ` ${ctx.label}: ${ctx.raw} (${pct}%)`;
+        }}}
+      }
     }
   });
+  // render side legend
+  const leg = document.getElementById('compLegend');
+  if (leg) {
+    leg.innerHTML = types.map((t,i) => {
+      const pct = total ? (counts[i]/total*100).toFixed(1) : '0';
+      return `<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#fafaf8;border:1px solid #e8e4dc;border-radius:8px;">
+        <div style="width:14px;height:14px;border-radius:50%;background:${typeColors[t]};flex-shrink:0;"></div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#2a2520;">${t}</div>
+          <div style="font-size:11px;color:#888;margin-top:2px;">${counts[i]} returns &middot; ${pct}% of incomplete</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
 }
 
 // V8 - Entry mode bar
