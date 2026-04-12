@@ -239,6 +239,187 @@
     margin-top: 4px;
   }
   /* FOOTER */
+
+  /* ── PAGE NAV TABS ── */
+  .page-nav {
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+  }
+  .page-tab {
+    padding: 14px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--ink-muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all .2s;
+    letter-spacing: .03em;
+  }
+  .page-tab:hover { color: var(--ink); }
+  .page-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .page-section { display: none; }
+  .page-section.active { display: block; }
+
+  /* ── BEFORE/AFTER SECTION ── */
+  .ba-intro {
+    padding: 40px 40px 0;
+    max-width: 900px;
+  }
+  .ba-intro h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .ba-intro p {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+  .ba-kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 16px;
+    padding: 28px 40px 0;
+  }
+  .ba-kpi {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ba-kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+  .ba-kpi-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .ba-before {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem;
+    color: var(--warn);
+    font-weight: 400;
+  }
+  .ba-arrow {
+    font-size: 1.1rem;
+    color: var(--ink-muted);
+  }
+  .ba-after {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .ba-sub {
+    font-size: 11px;
+    color: var(--ink-muted);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+  .ba-delta {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 6px;
+  }
+  .ba-delta.good { background: #d1ede5; color: var(--accent); }
+  .ba-delta.warn { background: var(--warn-light); color: var(--warn); }
+  .ba-grid {
+    padding: 24px 40px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .ba-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 24px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .ba-card.full { grid-column: 1 / -1; }
+  .ba-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .ba-card-num {
+    background: var(--accent);
+    color: #fff;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .ba-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--ink);
+    flex: 1;
+    line-height: 1.2;
+  }
+  .ba-wrap { position: relative; flex:1; min-height: 260px; }
+  .ba-insight {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+  .ba-insight strong { color: var(--ink); font-weight: 600; }
+  .ba-legend {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+  .ba-legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  @media(max-width:900px){
+    .ba-kpi-strip { grid-template-columns:1fr 1fr; padding:16px 20px 0; }
+    .ba-grid { grid-template-columns:1fr; padding:16px 20px 30px; }
+    .ba-card.full { grid-column:1; }
+    .page-nav { padding:0 20px; }
+    .ba-intro { padding:24px 20px 0; }
+  }
   footer {
     text-align: center;
     padding: 20px 40px;
@@ -268,6 +449,15 @@
   </div>
   <div class="header-tag">Dataset 1 · Current State · n=2,500</div>
 </div>
+
+<!-- PAGE NAV -->
+<div class="page-nav">
+  <button class="page-tab active" onclick="switchTab('current',this)">Current State — Dataset 1</button>
+  <button class="page-tab" onclick="switchTab('before-after',this)">Before vs. After — Impact of the Solution</button>
+</div>
+
+<!-- ═══ PAGE: CURRENT STATE ═══ -->
+<div class="page-section active" id="tab-current">
 
 <!-- FILTERS -->
 <div class="filter-bar">
@@ -473,6 +663,212 @@
   </div>
 
 </div>
+
+</div><!-- end tab-current -->
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE: BEFORE vs AFTER
+═══════════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="tab-before-after">
+
+  <!-- NARRATIVE INTRO -->
+  <div class="ba-intro">
+    <h2>What Changed After the Solution Was Implemented</h2>
+    <p>The BorrowBox data analysis revealed a 14 percent incomplete return rate, 12 percent inventory mismatch rate, delays averaging 38 to 55 minutes, and satisfaction scores collapsing below 2.0 after 60-minute delays. Four solution features were built to address these failures: a mandatory Return Inspection Checklist at the point of return, an automated Alert and Flag System for hub managers, a Hub Manager Action Panel for daily task management, and a Resident Compliance View targeting repeat offenders.</p>
+    <p>The charts below show the simulated future state after those four features are in operation. Dataset 2 applies the same 22 variables and 2,500 transactions but reflects the improvement benchmarks the literature suggests are achievable with structured digital inspection tools. The before figures are from Dataset 1. The after figures represent Dataset 2.</p>
+  </div>
+
+  <!-- HEADLINE KPI COMPARISON STRIP -->
+  <div class="ba-kpi-strip">
+    <div class="ba-kpi">
+      <div class="ba-kpi-label">Incomplete Return Rate</div>
+      <div class="ba-kpi-row">
+        <span class="ba-before">14.0%</span>
+        <span class="ba-arrow">&#8594;</span>
+        <span class="ba-after">6.8%</span>
+      </div>
+      <div class="ba-sub">Benchmark target: 6–8% (Jones et al., ACM 2023)</div>
+      <span class="ba-delta good">51% reduction</span>
+    </div>
+    <div class="ba-kpi">
+      <div class="ba-kpi-label">Inventory Mismatch Rate</div>
+      <div class="ba-kpi-row">
+        <span class="ba-before">12.0%</span>
+        <span class="ba-arrow">&#8594;</span>
+        <span class="ba-after">4.2%</span>
+      </div>
+      <div class="ba-sub">Target: below 5% (DeHoratius &amp; Raman, 2008)</div>
+      <span class="ba-delta good">65% reduction</span>
+    </div>
+    <div class="ba-kpi">
+      <div class="ba-kpi-label">Avg. Delay — Incomplete Returns</div>
+      <div class="ba-kpi-row">
+        <span class="ba-before">47 min</span>
+        <span class="ba-arrow">&#8594;</span>
+        <span class="ba-after">18 min</span>
+      </div>
+      <div class="ba-sub">Target: under 20 min (Baden, Peattie &amp; Oke, 2020)</div>
+      <span class="ba-delta good">62% reduction</span>
+    </div>
+    <div class="ba-kpi">
+      <div class="ba-kpi-label">Avg. Satisfaction Score</div>
+      <div class="ba-kpi-row">
+        <span class="ba-before">3.21</span>
+        <span class="ba-arrow">&#8594;</span>
+        <span class="ba-after">3.94</span>
+      </div>
+      <div class="ba-sub">Target: above 3.8 (Möhlmann, 2015)</div>
+      <span class="ba-delta good">+23% improvement</span>
+    </div>
+    <div class="ba-kpi">
+      <div class="ba-kpi-label">Cancellation Rate</div>
+      <div class="ba-kpi-row">
+        <span class="ba-before">8.1%</span>
+        <span class="ba-arrow">&#8594;</span>
+        <span class="ba-after">2.9%</span>
+      </div>
+      <div class="ba-sub">Target: below 3% (Barretto &amp; Dessai)</div>
+      <span class="ba-delta good">64% reduction</span>
+    </div>
+    <div class="ba-kpi">
+      <div class="ba-kpi-label">Avg. Replacement Cost / Incident</div>
+      <div class="ba-kpi-row">
+        <span class="ba-before">$193</span>
+        <span class="ba-arrow">&#8594;</span>
+        <span class="ba-after">$84</span>
+      </div>
+      <div class="ba-sub">Fewer incidents and earlier detection</div>
+      <span class="ba-delta good">56% reduction</span>
+    </div>
+  </div>
+
+  <!-- COMPARISON CHARTS -->
+  <div class="ba-grid">
+
+    <!-- C1: Incomplete rate by hub before vs after -->
+    <div class="ba-card">
+      <div class="ba-card-header">
+        <div class="ba-card-num">1</div>
+        <div class="ba-card-title">Incomplete Return Rate by Hub — Before vs. After</div>
+      </div>
+      <div class="ba-legend">
+        <span><span class="ba-legend-dot" style="background:#e07a3a;"></span>Before (Dataset 1)</span>
+        <span><span class="ba-legend-dot" style="background:#2d6a4f;"></span>After (Dataset 2)</span>
+      </div>
+      <div class="ba-wrap"><canvas id="baHub"></canvas></div>
+      <div class="ba-insight"><strong>Hub 2 and Hub 5</strong> show the largest reductions — from above 16% to below 8% — because the Inspection Checklist had the strongest impact at hubs with the weakest prior process. Hub 1, which was already close to benchmark, shows a smaller but still meaningful improvement.</div>
+    </div>
+
+    <!-- C2: Satisfaction by delay bucket before vs after -->
+    <div class="ba-card">
+      <div class="ba-card-header">
+        <div class="ba-card-num">2</div>
+        <div class="ba-card-title">Satisfaction Score by Delay Bucket — Before vs. After</div>
+      </div>
+      <div class="ba-legend">
+        <span><span class="ba-legend-dot" style="background:#e07a3a;"></span>Before</span>
+        <span><span class="ba-legend-dot" style="background:#2d6a4f;"></span>After</span>
+      </div>
+      <div class="ba-wrap"><canvas id="baSat"></canvas></div>
+      <div class="ba-insight">The most dramatic improvement is in the <strong>31–60 minute delay bucket</strong>, where satisfaction rises from 2.8 to 3.7 because fewer incidents reach this duration. The 0-minute bucket improves modestly from 4.1 to 4.4 as overall system reliability builds resident confidence.</div>
+    </div>
+
+    <!-- C3: Monthly incomplete trend before vs after line -->
+    <div class="ba-card full">
+      <div class="ba-card-header">
+        <div class="ba-card-num">3</div>
+        <div class="ba-card-title">Monthly Incomplete Returns — Before vs. After (Full Year)</div>
+      </div>
+      <div class="ba-legend">
+        <span><span class="ba-legend-dot" style="background:#e07a3a;"></span>Before (Dataset 1)</span>
+        <span><span class="ba-legend-dot" style="background:#2d6a4f;"></span>After (Dataset 2)</span>
+      </div>
+      <div class="ba-wrap" style="min-height:300px;"><canvas id="baTrend"></canvas></div>
+      <div class="ba-insight">The June–August peak, which was the most operationally damaging period, is substantially flattened in the after state. The Alert System and Hub Manager Action Panel together enabled proactive intervention before peak-period backlogs could accumulate. <strong>August incomplete returns fall from 52 to 21</strong> — the single largest monthly reduction in the dataset.</div>
+    </div>
+
+    <!-- C4: Component type donut before vs after side by side -->
+    <div class="ba-card">
+      <div class="ba-card-header">
+        <div class="ba-card-num">4</div>
+        <div class="ba-card-title">Missing Component Type Distribution — Before vs. After</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div>
+          <div style="text-align:center;font-size:12px;font-weight:600;color:var(--warn);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">Before</div>
+          <div style="position:relative;height:200px;"><canvas id="baCompBefore"></canvas></div>
+        </div>
+        <div>
+          <div style="text-align:center;font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">After</div>
+          <div style="position:relative;height:200px;"><canvas id="baCompAfter"></canvas></div>
+        </div>
+      </div>
+      <div class="ba-insight"><strong>Cord-related incomplete returns fall the most</strong> because the Inspection Checklist explicitly prompts volunteers to verify cords for Power Tools — the highest-risk category. The Attachment share remains relatively stable, reflecting that these items are more difficult to detect as missing during a brief inspection.</div>
+    </div>
+
+    <!-- C5: Entry mode rate before vs after -->
+    <div class="ba-card">
+      <div class="ba-card-header">
+        <div class="ba-card-num">5</div>
+        <div class="ba-card-title">Incomplete Rate by Entry Mode — Before vs. After</div>
+      </div>
+      <div class="ba-legend">
+        <span><span class="ba-legend-dot" style="background:#e07a3a;"></span>Before</span>
+        <span><span class="ba-legend-dot" style="background:#2d6a4f;"></span>After</span>
+      </div>
+      <div class="ba-wrap"><canvas id="baMode"></canvas></div>
+      <div class="ba-insight"><strong>Manual entry improves the most</strong> because the Checklist feature replaces unstructured manual logging with a structured digital form. The App rate remains the lowest but also improves as the Alert System catches any items the app-based process missed at return time.</div>
+    </div>
+
+    <!-- C6: Cascade summary before vs after -->
+    <div class="ba-card full">
+      <div class="ba-card-header">
+        <div class="ba-card-num">6</div>
+        <div class="ba-card-title">Operational Cascade — Before vs. After Summary</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:4px;" id="baCascade">
+        <div class="cascade-item">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);margin-bottom:10px;">Items Reprocessed</div>
+          <div style="display:flex;align-items:baseline;gap:10px;justify-content:center;">
+            <span style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--warn);">350</span>
+            <span style="color:var(--ink-muted);">&#8594;</span>
+            <span style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--accent);">170</span>
+          </div>
+          <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">51% fewer reprocessing events</div>
+        </div>
+        <div class="cascade-item">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);margin-bottom:10px;">Cancellations</div>
+          <div style="display:flex;align-items:baseline;gap:10px;justify-content:center;">
+            <span style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--warn);">203</span>
+            <span style="color:var(--ink-muted);">&#8594;</span>
+            <span style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--accent);">73</span>
+          </div>
+          <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">64% fewer cancelled reservations</div>
+        </div>
+        <div class="cascade-item">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);margin-bottom:10px;">Avg. Cost / Incident</div>
+          <div style="display:flex;align-items:baseline;gap:10px;justify-content:center;">
+            <span style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--warn);">$193</span>
+            <span style="color:var(--ink-muted);">&#8594;</span>
+            <span style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--accent);">$84</span>
+          </div>
+          <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">56% lower cost per incident</div>
+        </div>
+        <div class="cascade-item">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);margin-bottom:10px;">Low Satisfaction (1–2)</div>
+          <div style="display:flex;align-items:baseline;gap:10px;justify-content:center;">
+            <span style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--warn);">312</span>
+            <span style="color:var(--ink-muted);">&#8594;</span>
+            <span style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--accent);">89</span>
+          </div>
+          <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">71% fewer low satisfaction scores</div>
+        </div>
+      </div>
+      <div class="ba-insight" style="margin-top:12px;">The cascade panel shows the compounding benefit of early intervention. Every incomplete return prevented by the Inspection Checklist eliminates not just the reprocessing burden but also the downstream cancellation, replacement cost, and satisfaction impact. The solution does not just reduce one metric — it breaks the entire chain of consequences that flows from a single missed component check.</div>
+    </div>
+
+  </div>
+</div><!-- end tab-before-after -->
 
 <footer>
   BorrowBox Operational Analytics Platform &nbsp;·&nbsp; Saint Louis University MRP 2026 &nbsp;·&nbsp;
@@ -1335,8 +1731,154 @@ function renderCascade() {
   document.getElementById('cLowSat').textContent    = lowS.toLocaleString();
 }
 
+// ══════════════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ══════════════════════════════════════════════════════════════════════
+function switchTab(name, btn) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.page-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'before-after') renderBeforeAfter();
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// BEFORE / AFTER DATA (Dataset 2 simulated future state)
+// ══════════════════════════════════════════════════════════════════════
+const BA_BEFORE = {
+  hubRates:   [10.2, 16.4, 13.1, 12.0, 15.8],
+  hubRatesA:  [5.1,  7.9,  6.8,  5.9,  7.4],
+  satBuckets: [4.1, 3.4, 2.8, 2.1, 1.7],
+  satBucketsA:[4.4, 3.9, 3.7, 3.1, 2.4],
+  monthly:    [18,19,24,21,28,43,48,52,31,22,17,14],
+  monthlyA:   [8, 9, 11,10,13,19,21,21,14,10, 8, 6],
+  compBefore: [42,31,27],
+  compAfter:  [21,28,51],
+  modeRates:  [11.2,17.6,13.8],
+  modeRatesA: [4.9, 8.1, 6.2],
+};
+
+let baCharts = {};
+function destroyBA(id){ if(baCharts[id]){ baCharts[id].destroy(); delete baCharts[id]; } }
+
+const BEFORE_COL  = '#e07a3a';
+const BEFORE_FILL = 'rgba(224,122,58,0.15)';
+const AFTER_COL   = '#2d6a4f';
+const AFTER_FILL  = 'rgba(45,106,79,0.15)';
+const GRID_COL    = '#edeae3';
+const TICK_COL    = '#6b6760';
+const FONT        = 'DM Sans';
+
+const baseOpts = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { grid: { display: false }, ticks: { font: { family: FONT }, color: TICK_COL } },
+    y: { grid: { color: GRID_COL }, ticks: { font: { family: FONT }, color: TICK_COL }, beginAtZero: true }
+  }
+};
+
+function renderBeforeAfter() {
+
+  // ── C1: Hub rates grouped bar ──────────────────────────────────────
+  destroyBA('baHub');
+  baCharts['baHub'] = new Chart(document.getElementById('baHub').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['Hub 1','Hub 2','Hub 3','Hub 4','Hub 5'],
+      datasets: [
+        { label: 'Before', data: BA_BEFORE.hubRates, backgroundColor: BEFORE_COL, borderRadius: 5, barPercentage: 0.4 },
+        { label: 'After',  data: BA_BEFORE.hubRatesA, backgroundColor: AFTER_COL,  borderRadius: 5, barPercentage: 0.4 }
+      ]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales,
+      y: { ...baseOpts.scales.y, ticks: { ...baseOpts.scales.y.ticks, callback: v => v + '%' } }
+    }}
+  });
+
+  // ── C2: Satisfaction by delay bucket grouped bar ───────────────────
+  destroyBA('baSat');
+  baCharts['baSat'] = new Chart(document.getElementById('baSat').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['0 min','1–30 min','31–60 min','61–90 min','91+ min'],
+      datasets: [
+        { label: 'Before', data: BA_BEFORE.satBuckets, backgroundColor: BEFORE_COL, borderRadius: 5, barPercentage: 0.4 },
+        { label: 'After',  data: BA_BEFORE.satBucketsA, backgroundColor: AFTER_COL,  borderRadius: 5, barPercentage: 0.4 }
+      ]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales,
+      y: { ...baseOpts.scales.y, max: 5, ticks: { ...baseOpts.scales.y.ticks, stepSize: 1 } }
+    }}
+  });
+
+  // ── C3: Monthly trend dual line ────────────────────────────────────
+  destroyBA('baTrend');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  baCharts['baTrend'] = new Chart(document.getElementById('baTrend').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [
+        { label: 'Before', data: BA_BEFORE.monthly, borderColor: BEFORE_COL, backgroundColor: BEFORE_FILL,
+          borderWidth: 2.5, pointBackgroundColor: BEFORE_COL, pointRadius: 4, tension: 0.35, fill: true },
+        { label: 'After',  data: BA_BEFORE.monthlyA, borderColor: AFTER_COL, backgroundColor: AFTER_FILL,
+          borderWidth: 2.5, pointBackgroundColor: AFTER_COL, pointRadius: 4, tension: 0.35, fill: true }
+      ]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales,
+      x: { ...baseOpts.scales.x, grid: { display: false } }
+    }}
+  });
+
+  // ── C4a: Component type donut BEFORE ──────────────────────────────
+  destroyBA('baCompBefore');
+  baCharts['baCompBefore'] = new Chart(document.getElementById('baCompBefore').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Cord','Attachment','Accessory'],
+      datasets: [{ data: BA_BEFORE.compBefore,
+        backgroundColor: [BEFORE_COL,'#74b3ce','#b7b3aa'], borderWidth: 2, borderColor: '#fff', hoverOffset: 6 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, cutout: '58%',
+      plugins: { legend: { position: 'bottom', labels: { font: { family: FONT, size: 11 }, color: TICK_COL, padding: 10 } } }
+    }
+  });
+
+  // ── C4b: Component type donut AFTER ───────────────────────────────
+  destroyBA('baCompAfter');
+  baCharts['baCompAfter'] = new Chart(document.getElementById('baCompAfter').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Cord','Attachment','Accessory'],
+      datasets: [{ data: BA_BEFORE.compAfter,
+        backgroundColor: [AFTER_COL,'#74b3ce','#b7b3aa'], borderWidth: 2, borderColor: '#fff', hoverOffset: 6 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, cutout: '58%',
+      plugins: { legend: { position: 'bottom', labels: { font: { family: FONT, size: 11 }, color: TICK_COL, padding: 10 } } }
+    }
+  });
+
+  // ── C5: Entry mode before vs after grouped bar ────────────────────
+  destroyBA('baMode');
+  baCharts['baMode'] = new Chart(document.getElementById('baMode').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['App','Manual','Checklist'],
+      datasets: [
+        { label: 'Before', data: BA_BEFORE.modeRates, backgroundColor: BEFORE_COL, borderRadius: 6, barPercentage: 0.4 },
+        { label: 'After',  data: BA_BEFORE.modeRatesA, backgroundColor: AFTER_COL,  borderRadius: 6, barPercentage: 0.4 }
+      ]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales,
+      y: { ...baseOpts.scales.y, ticks: { ...baseOpts.scales.y.ticks, callback: v => v + '%' } }
+    }}
+  });
+}
+
 // Init
 renderAll();
+
 </script>
 </body>
 </html>
